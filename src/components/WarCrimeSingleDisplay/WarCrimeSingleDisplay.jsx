@@ -6,6 +6,7 @@ import Chip from '@mui/material/Chip';
 import gsap from 'gsap'
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import { Carousel } from '@trendyol-js/react-carousel';
 
 const SingleDisplayMenuOption = ({optionText, optionIcon}) =>{
     return (
@@ -19,6 +20,34 @@ const SingleDisplayMenuOption = ({optionText, optionIcon}) =>{
             </div>          
         </div>
     )
+}
+
+const SlideArrowElement = ({children, direction}) =>{
+    return (
+        <div className={`absolute cursor-pointer top-1/2 transform -translate-y-1/2 ${direction === 'right' ? 'left-4' : 'right-4' } z-20 opacity-50 hover:opacity-100 transition-opacity duration-300 ease-in-out`}>
+            {children ? children :
+            <>
+                {direction === 'right' && <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+                      </svg>}
+                {direction === 'left' && <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>}
+
+              {direction !== 'right' && direction !== 'left' && "Change direction prop on this component to either 'right' or 'left'"}
+            </>
+            }
+        </div>
+    )
+}
+
+const Slide = ({children})=>{
+    return(
+     <div className={`min-h-screen pt-10 pointer-events-none w-full h-full bg-red-500`}>
+        {children}
+     </div>
+    )
+
 }
 
 const SingleDisplayMenu = ({closingFunction}) => {
@@ -102,6 +131,7 @@ export default function WarCrimeSingleDisplay(
      credibleAgenciesThatChecked,
      location,
      warCrime,
+     visualEvidences,
      buttonOnClickFunction
     }
     ) {
@@ -176,7 +206,7 @@ export default function WarCrimeSingleDisplay(
                             {/* Chip Holder Wrapper */}
     
                             <div className={`z-20 relative w-full flex items-center justify-between `}>
-                                    <div className={`cursor-pointer opacity-80 hover:opacity-100 transition-all duration-150 ease-in-out`}>
+                                    <div className={`cursor-pointer opacity-80 hover:opacity-100 transition-opacity duration-150 ease-in-out`}>
                                          <Chip
                                           className={`pointer-events-none`}
                                           icon={checkWhichChipIconToBeDisplayed("warCrime")}     
@@ -196,7 +226,7 @@ export default function WarCrimeSingleDisplay(
                             </div>
     
                             <div className={`absolute z-20 w-full flex items-center justify-between bottom-0 left-0 p-2`}>                                
-                                <div className={`cursor-pointer  relative opacity-80 hover:opacity-100 transition-all duration-150 ease-in-out`}>     
+                                <div className={`cursor-pointer  relative opacity-80 hover:opacity-100 transition-opacity duration-150 ease-in-out`}>     
                                     <Chip
                                         className={`pointer-events-none`}
                                         icon={checkWhichChipIconToBeDisplayed("location")}     
@@ -242,15 +272,40 @@ export default function WarCrimeSingleDisplay(
                 }
 
                 { mode === "large" && 
-                <div className={`text-white flex items-center justify-center flex-col lg:flex-row pt-10 relative`}>
+                <div className={`min-h-screen w-full bg-yellow-800 flex items-stretch justify-center flex-col lg:flex-row relative`}>
                    {/* absolute X button */}
                     <div onClick={()=>{buttonOnClickFunction(id)}} className={`absolute top-5 right-5`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="mt-10 h-12 w-12 cursor-pointer text-gray-200 hover:text-white transition-all duration-150 ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="mt-10 h-12 w-12 cursor-pointer text-gray-200 hover:text-white transition-color duration-150 ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>                     
                     </div>
-                    <div className={`w-full lg:w-1/2`}></div>
-                    <div className={`w-full lg:w-1/2`}>
+                    <div className={`relative bg-gray-800 lg:w-1/2`}>
+                        <Carousel
+                        swiping={true}
+                        swipeOn={0.1}
+                        show={1}
+                        dynamic={true}
+                        rightArrow={<SlideArrowElement direction={'right'}/>}
+                        leftArrow={<SlideArrowElement direction={'left'}/>}
+                        >
+                        {
+                        visualEvidences &&
+                        visualEvidences.map((visualEvidence, index) => {
+                            return (
+                                <Slide
+                                 key={visualEvidence.id}>
+                                a
+                                </Slide> 
+                                )                                
+
+                        })
+                        }  
+                        
+                      
+
+                        </Carousel>                    
+                    </div>
+                    <div className={`pt-10 lg:w-1/2`}>
                         <p>{id}</p>
                         <p>{title}</p>
                         <p>{description}</p>

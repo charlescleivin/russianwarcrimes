@@ -65,7 +65,7 @@ export default function Warcrimes() {
   return (
     <div className={`w-full relative`}>
  
-          <div ref={fullViewSingleDisplayPanel} className={`fixed transform -translate-y-full top-0 left-0 w-full min-h-screen bg-black z-40`}>
+          <div ref={fullViewSingleDisplayPanel} className={`fixed max-w-screen-2xl transform -translate-y-full -translate-x-1/2 top-0 left-1/2 w-full min-h-screen bg-black z-40`}>
             { 
               fullViewSingleDisplayPanelArray.map(
                 (element)=>{
@@ -87,6 +87,7 @@ export default function Warcrimes() {
                     credibleAgenciesThatChecked={element.credibleAgenciesThatChecked}                    
                     location={element.location}
                     warCrime={element.warCrime}
+                    visualEvidences={element.visualEvidences}
                     buttonOnClickFunction={openFullViewSingleDisplayPanel}
                     />
                   )

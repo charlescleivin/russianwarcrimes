@@ -27,7 +27,44 @@ export const DisplayableDataContextProvider = (props) => {
           "title": "Massacre in the Philippines",
           "description":"Massive attack on Ukraine by the US military forces in the Philippines",
           "location":"Kiev",
-          "warCrime": "Attacking Citizens"         
+          "warCrime": "Attacking Citizens",      
+          visualEvidences:[
+              {
+                  typeOfEvidence: "image",
+                  id: 1,
+                  media:"",                  
+                  description:'',
+                  sources:'',
+            },
+            {
+                typeOfEvidence: "video",
+                id:2,
+                media:"",                  
+                description:'',
+                sources:'',
+            },
+            {
+                typeOfEvidence: "audio",
+                id:3,
+                media:"",                  
+                description:'',
+                sources:'',
+            },
+            {
+                typeOfEvidence: "galleryOfImages",
+                id:4,
+                media:"",                  
+                description:'',
+                sources:'',
+            },
+            {
+                typeOfEvidence: "text",
+                id:5,
+                media:"",                  
+                description:'',
+                sources:'',
+            },
+          ]   
     },
     {  
         id: 2,
@@ -35,7 +72,8 @@ export const DisplayableDataContextProvider = (props) => {
         "title": "Massacre in the Philippines",
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
-        "warCrime":"Bombing Hospital"
+        "warCrime":"Bombing Hospital",
+        visualEvidences:[]
     }
     ,
     {     
@@ -44,7 +82,8 @@ export const DisplayableDataContextProvider = (props) => {
         "title": "Massacre in the Philippines",
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
-        "warCrime":"Bombing Hospital"
+        "warCrime":"Bombing Hospital",
+        visualEvidences:[]
     }
     ,
     {        
@@ -53,7 +92,8 @@ export const DisplayableDataContextProvider = (props) => {
         "title": "Massacre in the Philippines",
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
-        "warCrime":"Bombing Hospital"
+        "warCrime":"Bombing Hospital",
+        visualEvidences:[]
     }
     ,
     {   
@@ -62,7 +102,8 @@ export const DisplayableDataContextProvider = (props) => {
         "title": "Massacre in the Philippines",
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
-        "warCrime":"Bombing Hospital"
+        "warCrime":"Bombing Hospital",
+        visualEvidences:[]
     }
     ,
     {       
@@ -71,7 +112,8 @@ export const DisplayableDataContextProvider = (props) => {
         "title": "Massacre in the Philippines",
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
-        "warCrime":"Bombing Hospital"
+        "warCrime":"Bombing Hospital",
+        visualEvidences:[]
     }
       ] 
 
