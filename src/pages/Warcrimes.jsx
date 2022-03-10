@@ -86,8 +86,8 @@ export default function Warcrimes() {
                     howManyCredibleAgenciesChecked={element.howManyCredibleAgenciesChecked}
                     credibleAgenciesThatChecked={element.credibleAgenciesThatChecked}                    
                     location={element.location}
-                    warCrime={element.warCrime}
-                    visualEvidences={element.visualEvidences}
+                    warCrime={element.warCrime}                    
+                    evidences={element.evidences}
                     buttonOnClickFunction={openFullViewSingleDisplayPanel}
                     />
                   )
@@ -117,8 +117,9 @@ export default function Warcrimes() {
                   isFactCheckedByCredibleAgency={element.isFactCheckedByCredibleAgency}   
                   howManyCredibleAgenciesChecked={element.howManyCredibleAgenciesChecked}
                   credibleAgenciesThatChecked={element.credibleAgenciesThatChecked}                    
-                  location={element.location}
-                  warCrime={element.warCrime}
+                  location={element.location}          
+                  warCrime={element.warCrime}                    
+                  evidences={element.evidences}
                   buttonOnClickFunction={openFullViewSingleDisplayPanel}
                   />
                   )

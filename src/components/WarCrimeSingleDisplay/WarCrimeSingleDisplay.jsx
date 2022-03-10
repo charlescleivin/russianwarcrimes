@@ -6,6 +6,7 @@ import Chip from '@mui/material/Chip';
 import gsap from 'gsap'
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import { useState } from 'react';
 import { Carousel } from '@trendyol-js/react-carousel';
 
 const SingleDisplayMenuOption = ({optionText, optionIcon}) =>{
@@ -24,13 +25,13 @@ const SingleDisplayMenuOption = ({optionText, optionIcon}) =>{
 
 const SlideArrowElement = ({children, direction}) =>{
     return (
-        <div className={`absolute cursor-pointer top-1/2 transform -translate-y-1/2 ${direction === 'right' ? 'left-4' : 'right-4' } z-20 opacity-50 hover:opacity-100 transition-opacity duration-300 ease-in-out`}>
+        <div className={`absolute cursor-pointer top-1/2 transform -translate-y-1/2 ${direction === 'right' ? 'left-4' : 'right-4' } z-20 opacity-70 hover:opacity-100 transition-opacity duration-300 ease-in-out`}>
             {children ? children :
             <>
-                {direction === 'right' && <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                {direction === 'right' && <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
                       </svg>}
-                {direction === 'left' && <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                {direction === 'left' && <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>}
 
@@ -41,14 +42,72 @@ const SlideArrowElement = ({children, direction}) =>{
     )
 }
 
-const Slide = ({children})=>{
+const EvidenceSlide = ({typeOfEvidence, media,  id, description, source, numberOfEvidences})=>{
+
+    const [isImageLoading, setisImageLoading] = useState(true)
+
     return(
-     <div className={`min-h-screen pt-10 pointer-events-none w-full h-full bg-red-500`}>
-        {children}
+ <div className={`min-h-screen relative pt-10 pointer-events-none w-full h-full bg-gray-800`}>   
+       {/* overlay */}
+       <div className={`w-full absolute  min-h-screen inset-0 bg-black opacity-40 z-10`}>               
+       </div>        
+
+ 
+
+    { typeOfEvidence === "image" &&
+    <>
+            { 
+            isImageLoading &&  
+                <div className={`flex min-h-screen w-full -mt-10 items-center justify-center`}>
+                    <svg role="status" class="mr-2 w-16 h-16 text-white animate-spin fill-blue-800" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                    </svg>
+                </div> 
+            } 
+         <img onLoad={()=>{setisImageLoading(false)}} className={`absolute w-full h-full inset-0 z-0`} src={media} alt=""/>
+    </> 
+    }
+     <div className={`absolute flex flex-col items-end justify-center top-10 right-5 z-30`}>
+          <div className={`p-2 border border-gray-400 flex flex-col items-center justify-center`}>
+               <span className={`text-gray-100 font-sans text-sm font-light`}>Evidence</span> 
+               <span className={`text-gray-100 font-sans text-sm font-light`}>{id} of {numberOfEvidences}</span> 
+          </div>
+           <span className={`text-gray-100 font-sans text-base font-light`}>{description}</span> 
+           <span className={`text-gray-100 font-sans text-base font-bold`}>{source}</span>                       
      </div>
-    )
+       
+ 
+          
+             
+       
+
+       {
+       typeOfEvidence === "video" && 
+       <div>
+        a
+        </div>
+        }
+
+        {
+        typeOfEvidence === "audio" && 
+       <div>
+        b
+        </div>
+        }
+
+        {
+        typeOfEvidence === "text" && 
+       <div>
+        c
+        </div>
+        }
+        
+     </div>
+   )
 
 }
+
 
 const SingleDisplayMenu = ({closingFunction}) => {
 
@@ -130,8 +189,9 @@ export default function WarCrimeSingleDisplay(
      howManyCredibleAgenciesChecked,
      credibleAgenciesThatChecked,
      location,
+     media,
      warCrime,
-     visualEvidences,
+     evidences,
      buttonOnClickFunction
     }
     ) {
@@ -282,20 +342,26 @@ export default function WarCrimeSingleDisplay(
                     <div className={`relative bg-gray-800 lg:w-1/2`}>
                         <Carousel
                         swiping={true}
-                        swipeOn={0.1}
-                        show={1}
-                        dynamic={true}
+                        swipeOn={0.05}
+                        show={1}                       
                         rightArrow={<SlideArrowElement direction={'right'}/>}
                         leftArrow={<SlideArrowElement direction={'left'}/>}
                         >
                         {
-                        visualEvidences &&
-                        visualEvidences.map((visualEvidence, index) => {
+                        evidences &&
+                        evidences.map((element, index) => {
                             return (
-                                <Slide
-                                 key={visualEvidence.id}>
-                                a
-                                </Slide> 
+                                <div>
+                                    <EvidenceSlide
+                                     key={element.id}
+                                     id={element.id}
+                                     media={element.media}
+                                     numberOfEvidences={evidences.length}
+                                     description={element.description}
+                                     source={element.source}	
+                                     typeOfEvidence={element.typeOfEvidence}
+                                     />
+                                </div>
                                 )                                
 
                         })

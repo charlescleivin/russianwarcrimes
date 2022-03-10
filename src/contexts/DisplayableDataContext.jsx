@@ -11,7 +11,6 @@ export const DisplayableDataContextProvider = (props) => {
 
  const [fetchedArray, setfetchedArray] = useState([])
 
-
     // useEffect(() => {
     //     fetch("https://jsonplaceholder.typicode.com/todos")
     //     .then((answer)=>{ return answer.json()}) 
@@ -28,11 +27,11 @@ export const DisplayableDataContextProvider = (props) => {
           "description":"Massive attack on Ukraine by the US military forces in the Philippines",
           "location":"Kiev",
           "warCrime": "Attacking Citizens",      
-          visualEvidences:[
+          evidences:[
               {
                   typeOfEvidence: "image",
                   id: 1,
-                  media:"",                  
+                  media:"https://picsum.photos/id/1/500/500",                  
                   description:'',
                   sources:'',
             },
@@ -49,21 +48,21 @@ export const DisplayableDataContextProvider = (props) => {
                 media:"",                  
                 description:'',
                 sources:'',
-            },
+            },         
             {
-                typeOfEvidence: "galleryOfImages",
+                typeOfEvidence: "text",
                 id:4,
                 media:"",                  
                 description:'',
                 sources:'',
             },
             {
-                typeOfEvidence: "text",
-                id:5,
-                media:"",                  
+                typeOfEvidence: "image",
+                id: 5,
+                media:"https://picsum.photos/id/2/500/500",                  
                 description:'',
                 sources:'',
-            },
+          },
           ]   
     },
     {  
@@ -73,7 +72,22 @@ export const DisplayableDataContextProvider = (props) => {
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
         "warCrime":"Bombing Hospital",
-        visualEvidences:[]
+        evidences:[
+            {
+                typeOfEvidence: "image",
+                id: 1,
+                media:"https://picsum.photos/id/5/500/500",                  
+                description:'',
+                sources:'',
+          },
+               {
+                typeOfEvidence: "image",
+                id: 2,
+                media:"https://picsum.photos/id/6/500/500",                  
+                description:'Example Description',
+                sources:'Example Source',
+          },
+        ]
     }
     ,
     {     
@@ -83,7 +97,7 @@ export const DisplayableDataContextProvider = (props) => {
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
         "warCrime":"Bombing Hospital",
-        visualEvidences:[]
+        evidences:[]
     }
     ,
     {        
@@ -93,7 +107,7 @@ export const DisplayableDataContextProvider = (props) => {
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
         "warCrime":"Bombing Hospital",
-        visualEvidences:[]
+        evidences:[]
     }
     ,
     {   
@@ -103,7 +117,7 @@ export const DisplayableDataContextProvider = (props) => {
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
         "warCrime":"Bombing Hospital",
-        visualEvidences:[]
+        evidences:[]
     }
     ,
     {       
@@ -113,7 +127,7 @@ export const DisplayableDataContextProvider = (props) => {
         "description":"Massive attack on Ukraine by the US military forces in the Philippines",
         "location":"Bilhorod-Dnistrovskyi",
         "warCrime":"Bombing Hospital",
-        visualEvidences:[]
+        evidences:[]
     }
       ] 
 
