@@ -7,7 +7,8 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:    
-      - run: npm install --legacy-peer-deps && npm run build --legacy-peer-deps
+      - uses: actions/checkout@v2
+      - run: npm ci --legacy-peer-deps && npm run build --legacy-peer-deps
       - uses: easingthemes/ssh-deploy@v2.2.11  
         with:
           # Private Key
