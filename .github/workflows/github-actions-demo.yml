@@ -1,17 +1,25 @@
-name: GitHub Actions Demo
+name: Deploy to Siteground Hosting through SSH on push
 on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: npm ci && npm run build
+      uses: easingthemes/ssh-deploy@v2.2.11  
+        with:
+        # Private Key
+        SSH_PRIVATE_KEY: '${{ secrets.PRIVATE_KEY }}'
+        # Remote host
+        REMOTE_HOST: russianwarcrimes.com
+        # Remote user
+        REMOTE_USER: u15-ke2zqxkc6tsk
+        # Remote port
+        REMOTE_PORT: 18765
+        # Source directory
+        SOURCE: build/
+        # Target directory
+        TARGET: public_html/
+        # Arguments to pass to rsync
+        ARGS: # optional, default is -rltgoDzvO
+        # An array of folder to exclude
+        EXCLUDE: # optional, default is 
