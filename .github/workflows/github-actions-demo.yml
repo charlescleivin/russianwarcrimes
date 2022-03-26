@@ -16,7 +16,7 @@ jobs:
           # Remote host
           REMOTE_HOST: russianwarcrimes.com
           # Remote user
-          REMOTE_USER: u15-ke2zqxkc6tsk
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
           # Remote port
           REMOTE_PORT: 18765
           # Source directory
