@@ -12,12 +12,12 @@ import AnnoucementBar from './components/AnnoucementBar/AnnoucementBar';
 
 export default function App() {
 
-
+  <span className={`hidden`}></span>
 
   return (    
     <div className="App flex pt-10 items-center justify-center w-full bg-gray-800">
      <div className={`max-w-screen-2xl flex flex-col items-center justify-center w-full`}>
-   
+ 
         <DisplayableDataContextProvider>
         <Router>
         <NavBar/>
@@ -33,6 +33,11 @@ export default function App() {
           </Routes>
         </Router>
         </DisplayableDataContextProvider>
+       
+   <div className={`fixed ${window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" ? 'hidden' : null} flex items-center justify-center text-4xl w-screen h-screen bg-white top-0 left-0 z-50`}>
+     In Construction    
+   </div>
+   
      </div>
     </div>
   );
