@@ -1,5 +1,8 @@
 name: Deploy to Siteground Hosting through SSH on push
-on: [push]
+'on':
+  push:
+    branches:
+      - master
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
