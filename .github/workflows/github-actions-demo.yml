@@ -1,7 +1,8 @@
 name: Deploy to Siteground Hosting through SSH on push
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  build_and_preview:
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
       - run: npm ci && npm run build
