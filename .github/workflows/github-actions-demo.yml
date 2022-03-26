@@ -4,10 +4,9 @@ name: Deploy to Siteground Hosting through SSH on push
     branches:
       - master
 jobs:
-  build_and_preview:
+  build_and_deploy:
     runs-on: ubuntu-latest
-    steps:
-      - run: echo "${{ github.event.pull_request.head.repo.full_name}} and ${{ github.repository}}"
+    steps:    
       - run: npm ci --legacy-peer-deps && npm run build --legacy-peer-deps
       - uses: easingthemes/ssh-deploy@v2.2.11  
         with:
