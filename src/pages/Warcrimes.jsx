@@ -10,7 +10,7 @@ export default function Warcrimes() {
   const params = useParams()
   const navigate = useNavigate()
 
-  const {fetchedDataArray} = useDisplayableDataContext()
+  const {fetchedDataArray, fetchedFromApiArray} = useDisplayableDataContext()
 
   const [fullViewSingleDisplayPanelArray, setfullViewSingleDisplayPanelArray] = useState([])
 
@@ -19,6 +19,7 @@ export default function Warcrimes() {
   const fullViewSingleDisplayPanel = useRef(null)
 
   useEffect(() => {
+
     openSingleDisplayTl.current.to(fullViewSingleDisplayPanel.current, 0.4,{
       ease: "Sine.inOut",
       y:0
@@ -64,6 +65,8 @@ export default function Warcrimes() {
 
   return (
     <div className={`w-full relative`}>
+
+     
  
           <div ref={fullViewSingleDisplayPanel} className={`fixed max-w-screen-2xl transform -translate-y-full -translate-x-1/2 top-0 left-1/2 w-full min-h-screen bg-black z-40`}>
             { 
@@ -96,9 +99,40 @@ export default function Warcrimes() {
             }
           </div>
 
-      
+          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4`}>
+           
+          
+           { 
+           fetchedFromApiArray.map((element, index) => {
+             return(
+             <WarCrimeSingleDisplay
+             key={element.id}
+             mode={"small"}
+             id={element.id}
+             thumbnail={element.thumbnail}
+             fullImage={element.fullImage}
+             title={element.title.rendered}
+             description={element.description}
+             date={element.date}
+             innitialSourcePlatform={element.innitialSourcePlatform}
+             parallelSources={element.parallelSources}
+             testimonials={element.testimonials}  
+             credibleAgenciesThatChecked={element.credibleAgenciesThatChecked}                    
+             location={element.location}          
+             warCrime={element.warCrime}                    
+             evidences={element.evidences}
+             buttonOnClickFunction={openFullViewSingleDisplayPanel}
+             />
+             )
+           })
+           }        
+           
+         
+   </div >       
 
         <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4`}>
+           
+          
                 { 
                 fetchedDataArray.map((element, index) => {
                   return(
@@ -113,9 +147,7 @@ export default function Warcrimes() {
                   date={element.date}
                   innitialSourcePlatform={element.innitialSourcePlatform}
                   parallelSources={element.parallelSources}
-                  testimonials={element.testimonials}
-                  isFactCheckedByCredibleAgency={element.isFactCheckedByCredibleAgency}   
-                  howManyCredibleAgenciesChecked={element.howManyCredibleAgenciesChecked}
+                  testimonials={element.testimonials}  
                   credibleAgenciesThatChecked={element.credibleAgenciesThatChecked}                    
                   location={element.location}          
                   warCrime={element.warCrime}                    
@@ -125,6 +157,8 @@ export default function Warcrimes() {
                   )
                 })
                 }        
+                
+              
         </div >       
     </div>
   )

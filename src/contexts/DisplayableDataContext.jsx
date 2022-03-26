@@ -9,14 +9,16 @@ export const useDisplayableDataContext = () => {
 
 export const DisplayableDataContextProvider = (props) => {
 
- const [fetchedArray, setfetchedArray] = useState([])
+ const [fetchedFromApiArray, setfetchedFromApiArray] = useState([])
 
-    // useEffect(() => {
-    //     fetch("https://jsonplaceholder.typicode.com/todos")
-    //     .then((answer)=>{ return answer.json()}) 
-    //     .then((data)=>{ setfetchedArray(data)})   
-    //     .catch((err)=>{console.log("Error:", err)})
-    // }, [])
+     useEffect(() => {
+        fetch("https://api.russianwarcrimes.com/wp-json/wp/v2/posts")
+        .then((answer)=>{ return answer.json()}) 
+        .then((data)=>{ 
+            console.log(data);
+            setfetchedFromApiArray(data)})   
+        .catch((err)=>{console.log("Error:", err)})
+    }, [])
     
    
   let fetchedDataArray = [
@@ -27,6 +29,14 @@ export const DisplayableDataContextProvider = (props) => {
           "description":"Massive attack on Ukraine by the US military forces in the Philippines",
           "location":"Kiev",
           "warCrime": "Attacking Citizens",      
+          credibleAgenciesThatChecked: [
+              {
+               nameOfAgency:"FBI",
+               agencyLink:"https://www.fbi.gov/",              
+               source:"www.google.com",
+               dateOfConfirmation: "2022-january-01",
+              },            
+          ],
           evidences:[
               {
                   typeOfEvidence: "image",
@@ -34,12 +44,13 @@ export const DisplayableDataContextProvider = (props) => {
                   media:"https://picsum.photos/id/1/500/500",                  
                   description:'',
                   sources:'',
+                  
             },
             {
                 typeOfEvidence: "video",
                 id:2,
-                media:"",                  
-                description:'',
+                media:"https://www.redditmedia.com/r/ukraine/comments/tau3tl/incoming_russian_convoy_got_smashed_at_eastern/?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark&amp;showedits=false&amp;created=2022-03-10T14%3A29%3A04.483Z",         
+                description:'Example Description',
                 sources:'',
             },
             {
@@ -128,12 +139,21 @@ export const DisplayableDataContextProvider = (props) => {
         "location":"Bilhorod-Dnistrovskyi",
         "warCrime":"Bombing Hospital",
         evidences:[]
+    },
+    {       
+        id: 7,
+        "thumbnail": Test1,
+        "title": "Massacre in the Philippines",
+        "description":"Massive attack on Ukraine by the US military forces in the Philippines",
+        "location":"Bilhorod-Dnistrovskyi",
+        "warCrime":"Bombing Hospital",
+        evidences:[]
     }
       ] 
 
   const value={
     fetchedDataArray,
-    fetchedArray, 
+    fetchedFromApiArray, 
   }
 
     return(

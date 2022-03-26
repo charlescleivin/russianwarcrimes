@@ -8,6 +8,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Donation from './pages/Donation';
 import Home from './pages/Home';
+import AnnoucementBar from './components/AnnoucementBar/AnnoucementBar';
 
 export default function App() {
 
@@ -20,6 +21,7 @@ export default function App() {
         <DisplayableDataContextProvider>
         <Router>
         <NavBar/>
+        <AnnoucementBar annoucementElement={<span>Just like Ukraine, this project is under daily Russian attack. Help us making the truth accessible. <strong>Donate now</strong>!</span>} path={"/donate"}/>
           <Routes>  
             <Route path="/" element={<Home />} />         
             <Route path="/warcrimes" element={<Warcrimes />} />      
