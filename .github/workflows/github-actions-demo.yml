@@ -1,11 +1,10 @@
 name: Deploy to Siteground Hosting through SSH on push
 on: [push]
-branches: [master]
 jobs:
   build_and_preview:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
+      - run: echo "${{ github.event.pull_request.head.repo.full_name}} and ${{ github.repository}}"
       - run: npm ci && npm run build
       - uses: easingthemes/ssh-deploy@v2.2.11  
         with:
