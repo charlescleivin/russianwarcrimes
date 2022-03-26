@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ github.event.pull_request.head.repo.full_name}} and ${{ github.repository}}"
-      - run: npm ci && npm run build
+      - run: npm ci --legacy-peer-deps && npm run build --legacy-peer-deps
       - uses: easingthemes/ssh-deploy@v2.2.11  
         with:
           # Private Key
