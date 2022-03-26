@@ -4,22 +4,22 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: npm ci && npm run build
-      uses: easingthemes/ssh-deploy@v2.2.11  
-        with:
-        # Private Key
-        SSH_PRIVATE_KEY: '${{ secrets.PRIVATE_KEY }}'
-        # Remote host
-        REMOTE_HOST: russianwarcrimes.com
-        # Remote user
-        REMOTE_USER: u15-ke2zqxkc6tsk
-        # Remote port
-        REMOTE_PORT: 18765
-        # Source directory
-        SOURCE: build/
-        # Target directory
-        TARGET: public_html/
-        # Arguments to pass to rsync
-        ARGS: # optional, default is -rltgoDzvO
-        # An array of folder to exclude
-        EXCLUDE: # optional, default is 
+    - run: npm ci && npm run build
+    uses: easingthemes/ssh-deploy@v2.2.11  
+    with:
+    # Private Key
+    SSH_PRIVATE_KEY: '${{ secrets.PRIVATE_KEY }}'
+    # Remote host
+    REMOTE_HOST: russianwarcrimes.com
+    # Remote user
+    REMOTE_USER: u15-ke2zqxkc6tsk
+    # Remote port
+    REMOTE_PORT: 18765
+    # Source directory
+    SOURCE: build/
+    # Target directory
+    TARGET: public_html/
+    # Arguments to pass to rsync
+    ARGS: # optional, default is -rltgoDzvO
+    # An array of folder to exclude
+    EXCLUDE: # optional, default is 
