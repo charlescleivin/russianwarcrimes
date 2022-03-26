@@ -19,7 +19,7 @@ export const DisplayableDataContextProvider = (props) => {
             setfetchedFromApiArray(data)})   
         .catch((err)=>{console.log("Error:", err)})
     }, [])
-    //aaaaaaaa
+    //aaaaaaaaa
    
   let fetchedDataArray = [
       {          
