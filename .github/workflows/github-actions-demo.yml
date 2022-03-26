@@ -3,7 +3,7 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    steps:
+      steps:
       - run: npm ci && npm run build
       uses: easingthemes/ssh-deploy@v2.2.11  
       with:
