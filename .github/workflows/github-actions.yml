@@ -1,4 +1,4 @@
-name: Deploy to Siteground Hosting through SSH on push
+name: Deploy to Siteground Hosting through FTP on push
 'on':
   push:
     branches:

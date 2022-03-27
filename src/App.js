@@ -20,17 +20,21 @@ export default function App() {
  
         <DisplayableDataContextProvider>
         <Router>
-        <NavBar/>
-        <AnnoucementBar annoucementElement={<span>Just like Ukraine, this project is under daily Russian attack. Help us making the truth accessible. <strong>Donate now</strong>!</span>} path={"/donate"}/>
-          <Routes>  
-            <Route path="/" element={<Home />} />         
-            <Route path="/warcrimes" element={<Warcrimes />} />      
-            <Route path="/warcrimes/:id" element={<Warcrimes />} />      
-            <Route path="/donate" element={<Donation />} />      
-            <Route path="/about" element={<About />} />      
-            <Route path="/contact" element={<Contact />} />   
-
-          </Routes>
+        {window.location.hostname === "localhost" &&  
+          <>
+              <NavBar/>
+              <AnnoucementBar annoucementElement={<span>Just like Ukraine, this project is under daily Russian attack. Help us making the truth accessible. <strong>Donate now</strong>!</span>} path={"/donate"}/>
+                <Routes>  
+                  <Route path="/" element={<Home />} />         
+                  <Route path="/warcrimes" element={<Warcrimes />} />      
+                  <Route path="/warcrimes/:id" element={<Warcrimes />} />      
+                  <Route path="/donate" element={<Donation />} />      
+                  <Route path="/about" element={<About />} />      
+                  <Route path="/contact" element={<Contact />} />   
+      
+                </Routes>
+          </>
+        }
         </Router>
         </DisplayableDataContextProvider>
        
