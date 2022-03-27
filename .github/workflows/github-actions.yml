@@ -4,26 +4,17 @@ name: Deploy to Siteground Hosting through SSH on push
     branches:
       - master
 jobs:
-  build_and_deploy:
+  build_and_deploy:  
     runs-on: ubuntu-latest
     steps:    
       - uses: actions/checkout@v2
       - run: npm ci --legacy-peer-deps && npm run build --legacy-peer-deps
-      - uses: easingthemes/ssh-deploy@v2.2.11  
-        with:
-          # Private Key
-          SSH_PRIVATE_KEY: '${{ secrets.PRIVATE_KEY }}'
-          # Remote host
-          REMOTE_HOST: russianwarcrimes.com
-          # Remote user
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          # Remote port
-          REMOTE_PORT: 18765
-          # Source directory
-          SOURCE: build/
-          # Target directory
-          TARGET: public_html/
-          # Arguments to pass to rsync
-          ARGS: # optional, default is -rltgoDzvO
-          # An array of folder to exclude
-          EXCLUDE: # optional, default is 
+      - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.FTP_SERVER}}
+        username: ${{ secrets.FTP_USERNAME}}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: public_html/
+
+     
