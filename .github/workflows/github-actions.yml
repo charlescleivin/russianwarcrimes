@@ -7,11 +7,13 @@ jobs:
   build_and_deploy:  
     runs-on: ubuntu-latest
     steps:  
-    - name: 📂 Build files    
+    - name: 📂 Allow repository to be used    
       uses: actions/checkout@v2
+
+    - name: 📂 Build the App for deployment
       run: npm ci --legacy-peer-deps && npm run build --legacy-peer-deps      
 
-    - name: 📂 Sync files
+    - name: 📂 Sync files / Deploy
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ${{ secrets.FTP_SERVER}}
