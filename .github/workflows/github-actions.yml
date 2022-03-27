@@ -6,12 +6,13 @@ name: Deploy to Siteground Hosting through SSH on push
 jobs:
   build_and_deploy:  
     runs-on: ubuntu-latest
-    steps:    
+    steps:        
+    - name: build
     uses: actions/checkout@v2
-    name: build
     run: npm ci --legacy-peer-deps && npm run build --legacy-peer-deps   
+    
+    - name: 📂 Sync files / deploy
     uses: SamKirkland/FTP-Deploy-Action@4.3.0
-    name: 📂 Sync files / deploy
     with:
       server: ${{ secrets.FTP_SERVER}}
       username: ${{ secrets.FTP_USERNAME}}
