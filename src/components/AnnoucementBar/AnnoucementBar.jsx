@@ -16,8 +16,8 @@ export default function AnnoucementBar({annoucementElement, path}) {
 
   return (
    <>
-        { location.pathname === '/donate' ? null :
-        <div className={`p-4 w-full flex items-center justify-center bg-red-500 text-white font-light font-sans`}>
+        { location.pathname === '/donate' || location.pathname.includes(`warcrimes/document/`) ? null :
+        <div className={`p-4 w-full  flex items-center justify-center bg-red-500 text-white font-light font-sans`}>
             <div onClick={()=>{handleClick()}} className={`w-full flex items-center justify-center h-full cursor-pointer`}>{annoucementElement}</div>         
         </div>
         }

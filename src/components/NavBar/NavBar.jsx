@@ -1,6 +1,6 @@
 import React, {useRef,useState,useEffect} from 'react'
 import gsap from 'gsap'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 const MenuOption = ({title, link, functionThatOperatesMenu}) => {
@@ -33,7 +33,7 @@ const MenuContent = ({functionThatOperatesMenu}) => {
         <div className={`w-full h-full text-right p-8 gap-4 flex items-center justify-start flex-col`}>
             { menuArray.map((item,index) => {
             return(
-                   <MenuOption functionThatOperatesMenu={functionThatOperatesMenu} link={item.link} title={item.title} />
+                   <MenuOption key={item.title} functionThatOperatesMenu={functionThatOperatesMenu} link={item.link} title={item.title} />
                    )
             })
             }
@@ -46,6 +46,8 @@ const MenuContent = ({functionThatOperatesMenu}) => {
 export default function NavBar() {
 
 const [isOpen, setisOpen] = useState(false)
+
+const location = useLocation()
 
 const hamburguerMenuTl = useRef(gsap.timeline({paused:true}))
 const hamburguerMenuTl2 = useRef(gsap.timeline({paused:true}))
@@ -102,7 +104,7 @@ const openOrCloseMenu = () => {
 }    
 
   return (
-    <div ref={expansiveNavBarThatBecomeTheMenu} className={`w-full overflow-hidden h-10  fixed max-w-screen-2xl transform -translate-x-1/2 top-0 left-1/2 bg-gray-800 z-50`}>
+    <div ref={expansiveNavBarThatBecomeTheMenu} className={`${location.pathname.includes(`warcrimes/document/`) ? 'hidden' : null }  w-full overflow-hidden h-10  fixed max-w-screen-2xl transform -translate-x-1/2 top-0 left-1/2 bg-gray-800 z-50`}>
       <div className={`absolute w-full z-40 bg-gray-800 top-0 h-10 left-0 flex px-8 items-center justify-between`}>
                 <div className={`font-sans font-bold text-gray-100 text-lg`}>Russian War Crimes</div>
                 <div onClick={()=>{openOrCloseMenu()}} className={`flex cursor-pointer w-6 items-center justify-center gap-1 flex-col`}>
