@@ -348,7 +348,7 @@ export default function WarCrimeSingleDisplay(
     }
     ) {
 
-    // Build the array of images to be displayed in the slides.
+    /// Build the array of images to be displayed in the slides.
     const [evidencesOrganizedArray, setevidencesOrganizedsArray] = useState([])
     const [thumbnailImage, setthumbnailImage] = useState('https://images.unsplash.com/photo-1623018035782-b269248df916?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80')
 
