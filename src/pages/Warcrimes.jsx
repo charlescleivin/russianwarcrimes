@@ -197,7 +197,7 @@ export default function Warcrimes() {
                       credibleAgenciesThatChecked={element.credibleAgenciesThatChecked}                    
                       location={element['location-and-time-of-warcrime']}          
                       warCrime={element.warCrime}                    
-                      evidences={element.evidences}
+                      evidences={element['evidence-group'] && element['evidence-group'][0] && element['evidence-group'][0][0]}         
                       buttonOnClickFunction={openFullViewSingleDisplayPanel}
                       />                        
                   )

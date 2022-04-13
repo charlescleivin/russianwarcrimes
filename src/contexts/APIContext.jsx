@@ -22,10 +22,10 @@ const [APIeffectArgs, setAPIeffectArgs] = useState({})
         console.log('Attempting to find image URL with Id:'+ id)
         fetch('https://api.russianwarcrimes.com/wp-json/warcrimesapi/v1/warcrimes/image='+id)
         .then(response => response.json())
-        .then(data => {
+        .then((data) => {
             console.log('Url Retrieved from id:'+ id,'URL:'+data)
-            if (functionToDoSomethingWithData) {
-                functionToDoSomethingWithData(data)            
+            if (functionToDoSomethingWithData) {            
+              functionToDoSomethingWithData(data)            
             } 
             if (callback) {
                 callback()
@@ -36,6 +36,7 @@ const [APIeffectArgs, setAPIeffectArgs] = useState({})
         })
         .catch(error => {
             console.log('Error retrieving image url from id:'+ id)
+            console.log('Error:', error)
             return false
         })
     }

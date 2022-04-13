@@ -11,6 +11,10 @@ import { useState } from 'react';
 import { Carousel } from '@trendyol-js/react-carousel';
 import { useNavigate } from 'react-router-dom';
 
+
+
+////////////// Ui Related /////////////////
+
 const SingleDisplayMenuOption = ({optionText, optionIcon, onClick, mode}) =>{
     return (
      <>
@@ -276,8 +280,6 @@ const EvidenceSlide = ({
 
 }
 
-////////////// Ui Related /////////////////
-
 const TextTitle = ({children}) => {
     return (
         <div className={`border-b pb-2`}>
@@ -333,7 +335,6 @@ export default function WarCrimeSingleDisplay(
     {
      mode,
      id,
-     thumbnail,
      title,
      longDescription,
      shortDescription,
@@ -348,33 +349,65 @@ export default function WarCrimeSingleDisplay(
     ) {
 
     // Build the array of images to be displayed in the slides.
-    const [imagesArray, setimagesArray] = useState([])
+    const [evidencesOrganizedArray, setevidencesOrganizedsArray] = useState([])
+    const [thumbnailImage, setthumbnailImage] = useState('https://images.unsplash.com/photo-1623018035782-b269248df916?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80')
 
     const {
         setfetchedFromApiArray,   
         setAPIeffectArgs,
+        getImageURLByIdRef,
        } = useAPIContext()
  
-        useEffect(() => {
 
-            let temporaryArrayofIdsToBeFetched = []     
-            let temporaryArrayOfImageURLs = []       
-            
-           evidences !== undefined && evidences.forEach((element)=>{
-                if (element.typeOfEvidence === 'image'){
-                    temporaryArrayofIdsToBeFetched.push(element['uploaded-evidence'])
-                }                    
-            })   
-               
-            temporaryArrayofIdsToBeFetched.forEach((element)=>{
-                setAPIeffectArgs({
-                    method: 'getImageURLById',
-                    id: element,
-                    functionToDoSomethingWithData: temporaryArrayOfImageURLs.push
+        // evidence logs
+        useEffect(() => {   
+
+            if (evidences){
+                let filteredImageEvidences = evidences.filter((evidence)=>{
+                    return evidence['type-of-evidence'] === 'image'
                 })
-            })           
-       
-        }, [])
+                let filteredVideoEvidences = evidences.filter((evidence)=>{
+                    return evidence['type-of-evidence'] === 'video'
+                })
+                let filteredSoundEvidences = evidences.filter((evidence)=>{
+                    return evidence['type-of-evidence'] === 'sound'
+                })
+                let filteredPDFEvidences = evidences.filter((evidence)=>{
+                    return evidence['type-of-evidence'] === 'pdf'
+                })
+
+                let imageURLArray = []
+                let i = 0
+
+                const getImageURLs = (data)=>{
+                    if (i === 1){
+                        setthumbnailImage(imageURLArray[0])
+                    }                
+                    imageURLArray.push(data)
+                    i++
+                }
+
+                filteredImageEvidences.map((image)=>{     
+                    getImageURLByIdRef.current(image['uploaded-evidence'], getImageURLs)                
+                })
+
+                let filteredEvidences=[                   
+                    ...filteredVideoEvidences,
+                    ...filteredImageEvidences,
+                    ...filteredSoundEvidences,
+                    ...filteredPDFEvidences
+                ]
+           }
+
+           
+
+
+        }, [evidences])
+        
+        useEffect(() => {
+          console.log('thumbnailImage:', thumbnailImage)
+        }, [thumbnailImage])
+        
 
     const singleDisplayInternalMenuWrapper = useRef(null)
     const openOrCloseSingleDisplayInternalMenuTl = gsap.timeline({paused: true});
@@ -389,7 +422,7 @@ export default function WarCrimeSingleDisplay(
     }
 
 
-
+// Useffect that handle closing or opening the internal menu
     useEffect(() => {
         openOrCloseSingleDisplayInternalMenuTl.to(singleDisplayInternalMenuWrapper.current, 0.3, {
         x: 0,
@@ -488,7 +521,7 @@ export default function WarCrimeSingleDisplay(
                         <div className={`w-64 h-96 flex flex-col items-center justify-start overflow-hidden shadow-2xl rounded-lg`}>
 
                         {/*  thumbnail and upper space */}
-                        <div style={{backgroundImage:`url(${thumbnail})`, backgroundSize:"cover"}} className={`w-full bg-gray-500 h-full p-2 relative`}>
+                        <div className={`w-full bg-gray-500 h-full p-2 relative`}>
 
                               <div className={`absolute inset-0 w-full h-full bg-black opacity-30 z-0`}></div>
 
@@ -540,7 +573,7 @@ export default function WarCrimeSingleDisplay(
                         <div className={`w-64 min-h-[24rem] h-auto flex flex-col items-center justify-start overflow-hidden shadow-2xl rounded-lg`}>
 
                         {/*  thumbnail and upper space */}
-                        <div style={{backgroundImage:`url(${thumbnail})`, backgroundSize:"cover"}} className={`w-full bg-red-500 h-52 p-2 relative`}>
+                        <div style={{backgroundImage:`url(${thumbnailImage})`, backgroundSize:"cover"}} className={`w-full bg-red-500 h-52 p-2 relative`}>
 
                               <div className={`absolute inset-0 w-full h-full bg-black opacity-30 z-0`}></div>
 
